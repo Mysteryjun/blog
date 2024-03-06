@@ -9,11 +9,7 @@
             label-position="left"
         >
             <div class="title-container">
-                <img
-                    width="180"
-                    src="https://cdn.boblog.com/FieFyVleQaVrqewVfPFkYgjlODZK"
-                    alt="logo"
-                />
+                <h3 class="title">Register Form</h3>
             </div>
 
             <el-form-item prop="email">
@@ -57,16 +53,15 @@
                 style="width: 100%; margin-bottom: 30px"
                 @click.native.prevent="handleLogin"
             >
-                登录
+                Login
             </el-button>
-            <div @click="toRegister" style="color:#fff">注册</div>
         </el-form>
     </div>
 </template>
 
 <script>
 import { validEmail } from '@/utils/validate';
-
+import { register } from '@/api/admin';
 export default {
     name: 'Login',
     data() {
@@ -107,9 +102,6 @@ export default {
         },
     },
     methods: {
-        toRegister() {
-            this.$router.push('/register');
-        },
         showPwd() {
             if (this.passwordType === 'password') {
                 this.passwordType = '';
@@ -125,16 +117,17 @@ export default {
             this.$refs.loginForm.validate(valid => {
                 if (valid) {
                     this.loading = true;
-                    this.$store
-                        .dispatch('admin/login', this.loginForm)
-                        .then(() => {
-                            this.$router.push({ path: this.redirect || '/' });
-                            this.loading = false;
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            this.loading = false;
-                        });
+                    register({
+                        email: this.loginForm.email,
+                        password1: this.loginForm.password,
+                        password2: this.loginForm.password,
+                        nickname: 'ss',
+                    }).then(res => {
+                        console.log(res);
+                        if (res.code == 200) {
+                            this.$router.push('/login');
+                        }
+                    });
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -148,24 +141,20 @@ export default {
 <style lang="scss">
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
-
 $bg: #283443;
 $light_gray: #fff;
 $cursor: #fff;
-
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
     .login-container .el-input input {
         color: $cursor;
     }
 }
-
 /* reset element-ui css */
 .login-container {
     .el-input {
         display: inline-block;
         height: 47px;
         width: 85%;
-
         input {
             background: transparent;
             border: 0px;
@@ -175,14 +164,12 @@ $cursor: #fff;
             color: $light_gray;
             height: 47px;
             caret-color: $cursor;
-
             &:-webkit-autofill {
                 box-shadow: 0 0 0px 1000px $bg inset !important;
                 -webkit-text-fill-color: $cursor !important;
             }
         }
     }
-
     .el-form-item {
         border: 1px solid rgba(255, 255, 255, 0.1);
         background: rgba(0, 0, 0, 0.1);
@@ -196,13 +183,11 @@ $cursor: #fff;
 $bg: #2d3a4b;
 $dark_gray: #889aa4;
 $light_gray: #eee;
-
 .login-container {
     min-height: 100%;
     width: 100%;
     background-color: $bg;
     overflow: hidden;
-
     .login-form {
         position: relative;
         width: 520px;
@@ -211,7 +196,6 @@ $light_gray: #eee;
         margin: 0 auto;
         overflow: hidden;
     }
-
     .svg-container {
         padding: 6px 5px 6px 15px;
         color: $dark_gray;
@@ -219,14 +203,8 @@ $light_gray: #eee;
         width: 30px;
         display: inline-block;
     }
-
     .title-container {
         position: relative;
-        display: flex;
-        align-items: center;
-        height: 64px;
-        margin-bottom: 32px;
-        justify-content: center;
         .title {
             font-size: 26px;
             color: $light_gray;
@@ -235,7 +213,6 @@ $light_gray: #eee;
             font-weight: bold;
         }
     }
-
     .show-pwd {
         position: absolute;
         right: 10px;
