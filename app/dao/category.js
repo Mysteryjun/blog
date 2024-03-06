@@ -104,9 +104,12 @@ class CategoryDao {
 
   // 分类列表
   static async list(query = {}) {
-    const { status, name, id, page_size = 10, page = 1 } = query
+    const { status = 1, name, id, page_size = 10, page = 1 } = query
+
     let params = {}
-    if (status) {
+
+    // 状态筛选，0-隐藏，1-正常
+    if (status || status === 0) {
       params.status = status
     }
 
@@ -119,8 +122,8 @@ class CategoryDao {
     if (id) {
       params.id = id
     }
-
     console.log('params', params)
+
     try {
       const category = await Category.scope('bh').findAndCountAll({
         where: params,

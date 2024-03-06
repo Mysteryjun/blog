@@ -129,6 +129,11 @@ class ArticleDao {
       deleted_at: null
     };
 
+    // 状态筛选，0-隐藏，1-正常
+    if (status || status === 0) {
+      filter.status = status
+    }
+
     // 筛选方式：存在分类ID
     if (category_id) {
       filter.category_id = category_id;
@@ -141,9 +146,6 @@ class ArticleDao {
       };
     }
 
-    if (status) {
-      filter.status = status
-    }
     try {
       const article = await Article.scope('iv').findAndCountAll({
         limit: page_size, //每页10条

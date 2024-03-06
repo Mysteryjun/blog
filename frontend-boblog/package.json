@@ -4,8 +4,8 @@
   "private": true,
   "config": {
     "nuxt": {
-      "host": "0.0.0.0",
-      "post": 3000
+      "host": "localhost",
+      "port": "3000"
     }
   },
   "scripts": {
