@@ -13,30 +13,11 @@
       <el-form-item label="描述" prop="description">
         <el-input v-model="ruleForm.description" />
       </el-form-item>
-      <el-form-item label="图片" prop="img_url">
-        <el-input v-model="ruleForm.img_url" />
-      </el-form-item>
+     
       <el-form-item label="SEO关键字" prop="seo_keyword">
         <el-input v-model="ruleForm.seo_keyword" />
       </el-form-item>
-      <el-form-item label="图片" prop="img_url">
-        <el-upload
-          class="avatar-uploader"
-          action="https://upload-z2.qiniup.com/"
-          :show-file-list="false"
-          :data="{ token }"
-          :on-success="handleUploadSuccess"
-        >
-          <img
-            v-if="ruleForm.img_url"
-            width="80"
-            height="80"
-            :src="ruleForm.img_url"
-            class="avatar"
-          >
-          <i v-else class="el-icon-plus avatar-uploader-icon" />
-        </el-upload>
-      </el-form-item>
+    
       <el-form-item label="展示" prop="status">
         <el-radio-group v-model="ruleForm.status">
           <el-radio :label="1">显示</el-radio>
@@ -94,7 +75,7 @@ export default {
         id: this.$route.query.id,
         title: '',
         description: '',
-        img_url: '',
+       
         seo_keyword: '',
         status: 1,
         sort_order: 1,
@@ -107,9 +88,7 @@ export default {
         description: [
           { required: true, message: '请输入文章描述', trigger: 'blur' }
         ],
-        img_url: [
-          { required: true, message: '请输入图片链接', trigger: 'blur' }
-        ],
+       
         seo_keyword: [
           { required: true, message: '请输入 SEO 关键字', trigger: 'blur' }
         ],
@@ -138,18 +117,9 @@ export default {
     initData() {
       this.$axios = axios.create({ withCredentials: false })
       this.getArticleDetail()
-      this.getUploadToken()
       this.getCategoryList()
     },
-    // 获取用户信息
-    async getUploadToken() {
-      try {
-        const res = await getToken()
-        this.token = res.data.token
-      } catch (err) {
-        console.log(err)
-      }
-    },
+   
     // 获取文章详情
     async getArticleDetail() {
       try {
@@ -159,7 +129,7 @@ export default {
         })
         this.ruleForm.title = res.data.title
         this.ruleForm.description = res.data.description
-        this.ruleForm.img_url = res.data.img_url
+        
         this.ruleForm.content = res.data.content
         this.ruleForm.seo_keyword = res.data.seo_keyword
         this.ruleForm.status = res.data.status
@@ -172,41 +142,7 @@ export default {
         console.log(err)
       }
     },
-    // 图片上传成功回调
-    handleUploadSuccess(file) {
-      this.ruleForm.img_url = `https://cdn.boblog.com/${file.key}`
-      this.$message.success('上传成功!')
-    },
-    $imgDel(pos, $file) {
-      console.log(pos, $file)
-    },
-    // 绑定@imgAdd event
-    $imgAdd(pos, $file) {
-      const loading = this.$loading({
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      })
-
-      // 第一步.将图片上传到服务器.
-      const formdata = new FormData()
-      formdata.append('file', $file)
-      formdata.append('token', this.token)
-      this.$axios({
-        url: 'https://upload-z2.qiniup.com/',
-        method: 'post',
-        data: formdata,
-        headers: { 'Content-Type': 'multipart/form-data' }
-      }).then((res) => {
-        const img_url = `https://cdn.boblog.com/${res.data.key}`
-        this.$refs.md.$img2Url(pos, img_url)
-        loading.close()
-      }).catch(err => {
-        console.log(err)
-        loading.close()
-      })
-    },
+    
     // 获取分类列表
     async getCategoryList() {
       try {

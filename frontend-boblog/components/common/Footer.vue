@@ -1,8 +1,8 @@
 <template>
   <div class="response-wrap footer">
     <div class="site">
-      <span>© 波波博客 - BoBlog.com</span>
-      <span>itbo@163.com</span>
+      <span>© Mysteryjun - yjyj.website</span>
+      <span>yjun520@126.com</span>
     </div>
     <div class="copyright">
       <a
@@ -10,7 +10,7 @@
         href="https://beian.miit.gov.cn"
         target="_blank"
       >
-        粤ICP备2020120493号
+        鄂ICP备2024030693号
       </a>
     </div>
   </div>

@@ -6,10 +6,6 @@
     >
       <li v-for="item in article.data" :key="item.id" class="article-list">
         <a :href="'/article?id=' + item.id" class="article-item" @click="(e) => jumpURL(e, item.id)">
-          <div class="article-image">
-            <img :src="item.img_url" :alt="item.title" />
-          </div>
-
           <div class="article-item-content">
             <h1 class="article-title">
               {{ item.title }}
@@ -55,7 +51,6 @@ export default {
       is_category: 1,
       is_admin: 1,
     })
-
     if (!err) {
       const isLoad = res.data.data.meta.total_pages > page
       return {

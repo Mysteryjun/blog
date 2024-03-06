@@ -80,11 +80,6 @@
             {{ scope.row.title }}
           </template>
         </el-table-column>
-        <el-table-column label="文章图片" align="center">
-          <template slot-scope="scope">
-            <img :src="scope.row.img_url" width="80" height="80" alt="">
-          </template>
-        </el-table-column>
         <el-table-column label="作者" width="80" align="center">
           <template slot-scope="scope">
             {{ scope.row.admin_info.nickname }}
