@@ -10,7 +10,7 @@
         href="https://beian.miit.gov.cn"
         target="_blank"
       >
-        鄂ICP备2024030693号
+        鄂ICP备2024040220号
       </a>
     </div>
   </div>

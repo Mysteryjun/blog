@@ -19,17 +19,25 @@
           </div>
           <div v-if="Array.isArray(categoryList) && categoryList.length">
             <el-dropdown>
-              <span class="el-dropdown-link" >
+              <span class="el-dropdown-link">
                 分类<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item v-for="item in categoryList" :key="item.id">
-                  <a class="category-links" :href="'/?category_id=' + item.id">{{ item.name }}</a>
+                  <a
+                    class="category-links"
+                    :href="'/?category_id=' + item.id"
+                    >{{ item.name }}</a
+                  >
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
-          <a href="https://github.com/lfb/nodejs-koa-blog" target="_blank" class="nav-item">
+          <a
+            href="https://github.com/Mysteryjun"
+            target="_blank"
+            class="nav-item"
+          >
             Github
           </a>
         </div>
@@ -68,7 +76,7 @@ export default {
         {
           title: '首页',
           router: '/',
-        }
+        },
       ],
     }
   },
@@ -76,7 +84,7 @@ export default {
     ...mapState({
       userInfo: (state) => state.user.userInfo,
       isLoginStatus: (state) => state.user.isLoginStatus,
-      categoryList: (state) => state.category.categoryList
+      categoryList: (state) => state.category.categoryList,
     }),
   },
   watch: {
