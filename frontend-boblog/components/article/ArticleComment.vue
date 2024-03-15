@@ -2,9 +2,7 @@
   <div>
     <div class="comment">
       <div class="comment-from">
-        <div class="comment-avatar">
-          <img src="https://cdn.boblog.com/avatar.png" alt="avatar" />
-        </div>
+        <div class="comment-avatar"></div>
         <div class="comment-textarea">
           <textarea
             ref="textarea"
@@ -38,9 +36,7 @@
           :key="item.id"
           class="comment-item"
         >
-          <div class="comment-item-avatar">
-            <img src="https://cdn.boblog.com/avatar.png" alt="avatar" />
-          </div>
+          <div class="comment-item-avatar"></div>
           <div class="comment-item-detail">
             <div class="comment-item-user">
               {{ (item.user_info && item.user_info.username) || '匿名评论' }}

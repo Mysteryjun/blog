@@ -1,13 +1,9 @@
 <template>
   <div class="form-wrap">
     <div class="form">
-      <div class="form-bg">
-        <img src="https://cdn.boblog.com/login-bg.png" alt="login" />
-      </div>
+      <div class="form-bg"></div>
       <div class="form-list">
-        <div class="logo">
-          <img src="https://cdn.boblog.com/logo.png" alt="logo" />
-        </div>
+        <div class="logo"></div>
         <div v-if="!isLogin" class="form-item">
           <input
             v-model="user.username"
